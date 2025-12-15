@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Medical Upcoding: How the Right Stats Could Save Self-Funded Employers Tens of Thousands/Year</title>
+    <style>
+        body { font-family: 'Georgia', 'Times New Roman', Times, serif; max-width: 900px; margin: 0 auto; padding: 20px; line-height: 1.6; }
+        h1 { color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #34495e; }
+        h3 { color: #34495e; font-size: 1.1em; }
+        .scenario { background: #ecf0f1; padding: 20px; border-left: 5px solid #3498db; margin: 20px 0; }
+        .recovery { background: #d5f4e6; padding: 20px; border-left: 5px solid #27ae60; margin: 20px 0; }
+        table { border-collapse: collapse; width: 100%; margin: 20px 0; }
+        th, td { border: 1px solid #bdc3c7; padding: 12px; text-align: right; }
+        th { background: #3498db; color: white; font-weight: bold; }
+        .highlight { background: #f39c12; color: white; font-weight: bold; }
+        .code { background: #2c3e50; color: #ecf0f1; padding: 15px; border-radius: 5px; font-family: 'Courier New', monospace; overflow-x: auto; }
+        .impact { font-size: 1.2em; font-weight: bold; color: #27ae60; }
+        .derm-response { font-style: italic; color: #e74c3c; }
+        .disclaimer { background: #fff3cd; padding: 15px; border-left: 5px solid #ffc107; margin: 20px 0; font-style: italic; }
+        .table-title { font-size: 1.1em; font-weight: bold; margin: 10px 0 5px 0; color: #34495e; }
+        .note { background: #e8f4f8; padding: 15px; border-left: 5px solid #3498db; margin: 20px 0; }
+        .latex-eq { 
+            text-align: center; 
+            margin: 20px 0; 
+            font-size: 1.2em; 
+            background: #f8f9fa; 
+            padding: 15px; 
+            border-radius: 8px; 
+            border-left: 4px solid #3498db;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🔍 Medical Upcoding: How the Right Stats Could Save Self-Funded Employers Tens of Thousands/Year</h1>
+
+<div class="scenario">
+<p><strong>Suppose you are a self-funded employer:</strong> You collect employee premiums and pay medical bills directly, using an insurance company's network of doctors. Your <strong>Third Party Administrator (TPA)</strong> — who handles claims processing and payments — notifies you that <strong>Platinum Dermatology Group</strong> has suspiciously high charges ($1,476/claim vs $277 from 30 matched normal providers) and may be upcoding (fraudulently billing minor procedures as advanced ones).</p>
+
+<p>You and your TPA contact Platinum Dermatology Group for explanation. They respond with a t-test (p=0.0725): "Our charges show no significant difference from comparable providers. Continue payments."</p>
+
+<p><strong>What do you do?</strong> Without proper statistical rebuttal, you lose $70K historical overpayment + $70K/year future. The provider-level test (z=2.05, p=0.0407) provides your counterpunch, enabling recovery and prevention.</p>
+</div>
+
+<div class="disclaimer">
+<p><em><strong>Hypothetical Example:</strong> Platinum Dermatology Group is a <strong>fictional name</strong> used for illustration. This analysis uses <strong>synthetic datasets</strong> for illustrative purposes only—no real providers or claims are referenced. Results demonstrate statistical methodology, not specific allegations.</em></p>
+</div>
+
+<p><strong>Roadmap:</strong> What follows includes technical details on the synthetic dataset, why Platinum Dermatology Group's 
+    analysis is wrong, and what the right analysis is (the provider-level test). We also answer a question that Platinum Dermatology <em>didn't</em> ask, 
+    which provides critical details on the amount you can reasonably expect to recover in overcharges.</p>
+
+<h2>Synthetic Dataset: 2024 Dermatology Claims</h2>
+
+<p>The synthetic claims data used for this analysis comprises all claims from two sets of hypothetical providers in 2024. There are 59 claims from 30 providers at Platinum Dermatology Group, plus 312 claims from 30 other dermatologists. We assume the 30 other dermatologists were similar to Platinum Dermatology Group providers in all factors that would seem to matter (for instance, treating similar medical conditions). The following table presents summary data. For the <strong>full dataset of 371 claims</strong>, see the <a href="https://github.com/dglassbrenner1/medical-upcoding-save-tens-of-thousands-per-yr">Python code on GitHub</a>.</p>
+
+<h3 class="table-title">Dataset Summary</h3>
+
+<table>
+    <tr><th>Group</th><th>Providers</th><th>Claims</th><th>Total Paid</th><th>Avg/Claim</th></tr>
+    <tr>
+        <td>Normal Derms</td>
+        <td>30</td>
+        <td>312</td>
+        <td>$86,424</td>
+        <td>$277</td>
+    </tr>
+    <tr class="highlight">
+        <td><strong>Platinum Dermatology Group</strong></td>
+        <td><strong>30</strong></td>
+        <td><strong>59</strong></td>
+        <td class="highlight"><strong>$87,084</strong></td>
+        <td class="highlight"><strong>$1,476</strong></td>
+    </tr>
+</table>
+
+<p><em><a href="https://github.com/dglassbrenner1/medical-upcoding-save-tens-of-thousands-per-yr">Full dataset of 371 claims (59 Platinum Dermatology Group + 312 normal) in Python code on GitHub</a>.</em></p>
+
+<p>Now we'll look at two questions:</p>
+<ul>
+    <li>Q1: Does Platinum Dermatology Group charge the same amount as other providers?</li>
+    <li>Q2: By how much does Platinum Dermatology Group overcharge?</li>
+</ul>
+
+<p>Of course, Platinum Dermatology didn't answer the second question. 😊</p>
+
+<h2>Q1: Does Platinum Dermatology Group Charge the Same Amount as Other Providers?</h2>
+
+<p><strong>Platinum Dermatology Group's t-test defense (p=0.0725):</strong> Platinum Dermatology Group providers present an ordinary two-sample t-test (p=0.0725), claiming "no significant difference." This test assumes the 59 claim amounts from their providers are independent and identically distributed (IID), and the same for the 312 claims from normal providers.</p>
+
+<p><strong>But this assumption is false:</strong> Claims from the same provider are correlated (clustered), violating the IID assumption. One provider's patients may be systematically sicker or healthier, leading to higher or lower charges. Probabilistically, if you tell me that the first charge from Dr. Smith is $2,000, an unusually high amount, I now expect Dr. Smith's other charges to be higher than average too. This correlation among claims from the same provider is clustering. Ignoring clustering overestimates variability, inflating significance (lowering p-values). Thus, the t-test p=0.0725 is unreliable.</p>
+
+<p><strong>The correct analysis:</strong> The right approach is to use "provider", not "claim", as the unit of analysis. The null hypothesis is the same as for the claims-level t-test - that the average claim amount per provider is the same for Platinum Dermatology Group vs normal derms. The difference comes in how we estimate the variance of the average claim amounts. Rather than looking at claim-to-claim variability (which is artificially high due to clustering), we look at provider-to-provider variability. We do this by bootstrapping (resampling) at the provider level, preserving clustering. The bootstrapping simulates the process of drawing samples by resampling entire providers (with <em>all</em> their 2024 claims) from each group. The standard error of the test statistic (the difference in average claim amounts per provider) is then estimated as the standard deviation of these resampled differences. The p-value from this provider-level test is valid because it correctly accounts for clustering. And the p-value of p=0.0407 detects significant overbilling by Platinum Dermatology Group providers.</p>
+
+<p>The next table shows the results. In it you can see the t-test's inflated standard error of $655/claim, which is what causes its inflated p-value of 0.0725. The provider-level test gives the right answers.</p>
+
+<h3 class="table-title">Test Statistics Comparison</h3>
+
+<table>
+    <tr><th>Test</th><th>p-value</th><th>Standard Error</th></tr>
+    <tr>
+        <td>t-test (claims independent)</td>
+        <td>0.0725</td>
+        <td>$655/claim</td>
+    </tr>
+    <tr class="highlight">
+        <td><strong>Provider-level test (clustering preserved)</strong></td>
+        <td><strong>0.0407</strong></td>
+        <td class="highlight"><strong>$586/claim</strong></td>
+    </tr>
+</table>
+
+<h2>Q2: By How Much Does Platinum Dermatology Group Overcharge?</h2>
+
+<p>Now on to the second question - the one that Platinum Dermatology didn't answer.</p>
+
+<p>The data indicates that Platinum Dermatology overcharges by $1,199 per claim ($1,476 for Platinum minus $277 for the other providers). This is the expected value of the difference in average claim charges, and is the best estimate of the amount by which the employer was overcharged. But as with most estimates, there's the best estimate and more conservative versions that take into account uncertainty (the variance of the test statistic).</p>
+
+<p>To do this, we look at the degree to which the test statistic typically deviates from the expected value. Assuming the test statistic (the difference in average claim charges between the two groups) is normally distributed, the test statistic minus 1.645 times its standard error is less than or equal to the expected value 95% of the time. That is,</p>
+
+<div class="latex-eq">
+P(&delta;<sup>^</sup> - 1.645 · SE(&delta;<sup>^</sup>) ≤ δ) = 0.95
+</div>
+
+<p>Using the standard error of $586 per claim and our point estimate of $1,199, we get that the true overcharge δ is at least $1,199 - 1.645×$586 = $235 per claim. The Python code <a href="https://github.com/dglassbrenner1/medical-upcoding-save-tens-of-thousands-per-yr">here</a> includes a better estimate of the same quantity using bootstrapping rather than assuming normality, giving $262 per-claim overbilling with 95% confidence. This is summarized in the following table, which also includes the corresponding figures for 90% and 99% confidence, as well as what would be obtained from Platinum's incorrect methodology, for comparison.</p>
+
+<h3 class="table-title">Minimum Overbilling by Confidence Level</h3>
+
+<table>
+    <tr><th>Confidence</th><th>t-test (incorrect)</th><th>Provider-level (correct)</th></tr>
+    <tr><td>90%</td><td>$349/claim</td><td class="highlight">$365/claim</td></tr>
+    <tr><td>95%</td><td>$103/claim</td><td class="highlight"><strong>$262/claim</strong></td></tr>
+    <tr><td>99%</td><td>-$369/claim<sup class="footnote">*</sup></td><td class="highlight">$127/claim</td></tr>
+</table>
+<p class="footnote-text" style="margin-top:2px; font-size:0.8em;">
+*The t-test overbilling at 99% confidence is negative because the standard error for the t-test is so large that the critical value times the standard error is larger than the point estimate.
+</p>
+
+<p>That is, we can be 90% confident that Platinum overbills by $365 per claim, 
+    95% confident that it overbills by $262 per claim, and 99% that it overbills by $127 per claim. 
+    Focusing on the 95% figure from the provider level test, the upshot is as follows:
+    the provider-level test detects $158 more overbilling per claim than the t-test, 
+    which for 59 claims equals $9,343 in additional recovery potential. </p>
+
+<h2>How the Employer Can Use This Analysis</h2>
+<p>The statistics provided here refute Platinum Dermatology Group's defense and provide a rigorous analysis to support whatever next steps the employer decides to take (like a demand letter or other legal action). However, while this analysis strengthens the employer's position for historical recovery and future rate adjustments, the employer would in all likelihood want to supplement this analysis with a rigorous review of medical coding by experts for all 60 dermatologists to confirm upcoding. <em>(Not legal advice — consult your TPA/legal counsel.)</em></p>
+
+<div class="recovery">
+<h2>Impact Summary</h2>
+<ul>
+    <li>✅ <strong>Statistical analysis refutes provider claim of 'no difference'</strong> → supports recovery action</li>
+    <li>✅ <strong>Expected savings:</strong> $70K/year (59 claims × $1,199 overage)<br>
+        <em>Conservative 95% CI: $15K/year (59 claims × $262)</em></li>
+    <li>✅ <strong>Historical recovery potential:</strong> $70K (settlement might provide less)</li>
+    <li>✅ <strong>3-Year Total ROI:</strong> $280K ($70K recovery + 3×$70K savings)<br>
+        <em>(or $190K using conservative minimum)</em></li>
+</ul>
+</div>
+
+
+<h2>Full Reproducible Python Analysis</h2>
+<div class="code">
+<pre><code># SYNTHETIC DATASET SUMMARY:
+# Normal:  312 claims @ $277/claim
+# Platinum Dermatology Group: 59 claims @ $1,476/claim
+
+# T-TEST (WRONG): t=1.83, p=0.0725 → "No fraud"
+# PROVIDER-LEVEL TEST (RIGHT): z=2.05, p=0.0407 → "Fraud detected"
+
+# 95% CONFIDENCE: $262/claim minimum overbilling
+# BUSINESS IMPACT: $70K recovery + $70K/year prevention
+</code></pre>
+</div>
+
+<p>For the full code implementing this analysis and exploratory plots, see this <a href="https://github.com/dglassbrenner1/medical-upcoding-save-tens-of-thousands-per-yr">GitHub Notebook</a></p>
+
+<hr>
+<p><em>Analysis Insights, LLC | By Donna Glassbrenner, Ph.D.</em></p>
+
+</body>
+</html>
