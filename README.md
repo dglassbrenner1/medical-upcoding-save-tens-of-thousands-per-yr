@@ -15,7 +15,7 @@
 
 What now? See the following analysis for details in this hypothetical scenario, and the counterpunch that wins the stats argument and empowers you to push back.
 
-📄 Full analysis: https://raw.githubusercontent.com/dglassbrenner1/medical-upcoding-save-tens-of-thousands-per-yr/main/how-a-self-funded-employer-could-save-tens-of-thousands-per-yr.html
+📄 Full analysis: [Medical Upcoding Analysis](https://dglassbrenner1.github.io/medical-upcoding-save-tens-of-thousands-per-yr/)
 🔗 GitHub code: https://github.com/dglassbrenner1/medical-upcoding-save-tens-of-thousands-per-yr
 
 #DataScience #HealthcareAnalytics #FraudDetection #Statistics
@@ -36,7 +36,7 @@ jupyter notebook provider-level-test-provides-evidence-of-fraudulent-upcoding.ip
 
 ## Key Products
 - **Technical analysis**: `provider-level-test-provides-evidence-of-fraudulent-upcoding.ipynb` (raw code)
-- **Employer report**: `how-a-self-funded-employer-could-save-tens-of-thousands-per-yr.html` (polished explanations)  
+- **Employer report**: [`how-a-self-funded-employer-could-save-tens-of-thousands-per-yr.html`](https://dglassbrenner1.github.io/medical-upcoding-save-tens-of-thousands-per-yr/) (polished explanations)  
 - **LinkedIn graphic**: `linkedin_upcoding_boxplot.png` (static PNG)
 
 ## Why p=0.0725 Fails
