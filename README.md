@@ -11,11 +11,9 @@
 🚨 TPA flags dermatology upcoding.
 😒 Center claims: "t-test shows no difference (p=0.0725)."
 
-[BOXPLOT IMAGE]
-
 What now? See the following analysis for details in this hypothetical scenario, and the counterpunch that wins the stats argument and empowers you to push back.
 
-📄 Full analysis: [Medical Upcoding Analysis](https://dglassbrenner1.github.io/medical-upcoding-save-tens-of-thousands-per-yr/)
+📄 Full analysis: https://dglassbrenner1.github.io/medical-upcoding-save-tens-of-thousands-per-yr
 🔗 GitHub code: https://github.com/dglassbrenner1/medical-upcoding-save-tens-of-thousands-per-yr
 
 #DataScience #HealthcareAnalytics #FraudDetection #Statistics
